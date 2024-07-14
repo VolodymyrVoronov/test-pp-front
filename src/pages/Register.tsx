@@ -1,16 +1,12 @@
 import { cn } from "../lib/utils";
 
-import { Card } from "../components/ui/Card";
 import GridPattern from "../components/ui/grid-pattern";
+import AuthForm from "../components/AuthForm";
 
 const Register = (): JSX.Element => {
   return (
     <div className="bg-background relative flex h-screen w-screen items-center justify-center overflow-hidden p-20 md:shadow-xl">
-      <Card className="z-20 bg-white p-5 shadow-2xl">
-        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white">
-          Grid Pattern
-        </p>
-      </Card>
+      <AuthForm formType="register" />
 
       <GridPattern
         width={30}
