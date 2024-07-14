@@ -1,9 +1,16 @@
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createHashRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createHashRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 
 import { ROUTES } from "./constants/constants.ts";
 
+import PageTransition from "./components/PageTransition.tsx";
 import Login from "./pages/Login.tsx";
 import Main from "./pages/Main.tsx";
 import Register from "./pages/Register.tsx";
@@ -16,28 +23,41 @@ import "@fontsource-variable/montserrat";
 const router = createHashRouter([
   {
     path: ROUTES.ROOT,
-    element: <Navigate to={ROUTES.REGISTER} replace={true} />,
-  },
-  {
-    element: <Register />,
-    path: ROUTES.REGISTER,
-  },
-  {
-    element: <Login />,
-    path: ROUTES.LOGIN,
-  },
-  {
-    element: <Verify />,
-    path: ROUTES.VERIFY,
-  },
-
-  {
-    element: <Main />,
-    path: ROUTES.MAIN,
-  },
-  {
-    path: "*",
-    element: <div>404</div>,
+    element: (
+      <div className="flex h-screen w-screen overflow-hidden">
+        <AnimatePresence>
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
+        </AnimatePresence>
+      </div>
+    ),
+    children: [
+      {
+        path: ROUTES.ROOT,
+        element: <Navigate to={ROUTES.REGISTER} replace={true} />,
+      },
+      {
+        element: <Register />,
+        path: ROUTES.REGISTER,
+      },
+      {
+        element: <Login />,
+        path: ROUTES.LOGIN,
+      },
+      {
+        element: <Verify />,
+        path: ROUTES.VERIFY,
+      },
+      {
+        element: <Main />,
+        path: ROUTES.MAIN,
+      },
+      {
+        path: "*",
+        element: <div>404</div>,
+      },
+    ],
   },
 ]);
 

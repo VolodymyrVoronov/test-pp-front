@@ -5,8 +5,10 @@ import AuthForm from "../components/AuthForm";
 
 const Register = (): JSX.Element => {
   return (
-    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden p-2 md:p-0 md:shadow-xl">
-      <AuthForm formType="register" />
+    <div className="relative flex h-screen w-screen items-center justify-center overflow-auto p-2 md:p-0">
+      <div className="flex h-svh items-center justify-center">
+        <AuthForm formType="register" />
+      </div>
 
       <GridPattern
         width={30}
