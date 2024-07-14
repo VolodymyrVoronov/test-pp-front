@@ -1,4 +1,5 @@
 import {
+  ArrowLeftIcon,
   EnterIcon,
   EyeClosedIcon,
   EyeOpenIcon,
@@ -62,6 +63,10 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
     }
 
     console.log(userData);
+  };
+
+  const onBackButtonClick = (): void => {
+    navigate(ROUTES.ROOT);
   };
 
   return (
@@ -147,7 +152,17 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             Register
             <PersonIcon className="ml-2 h-4 w-4" />
           </Button>
-        ) : null}
+        ) : (
+          <Button
+            onPress={onBackButtonClick}
+            type="button"
+            variant="secondary"
+            className="w-full"
+          >
+            <ArrowLeftIcon className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+        )}
 
         <Button
           onPress={onLoginButtonClick}
