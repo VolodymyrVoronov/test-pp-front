@@ -4,9 +4,7 @@ import { BackgroundGradientAnimation } from "../components/ui/background-gradien
 const Login = (): JSX.Element => {
   return (
     <BackgroundGradientAnimation className="absolute inset-0 flex items-center justify-center overflow-auto p-2 md:p-0">
-      <div className="flex h-svh items-center justify-center">
-        <AuthForm formType="login" />
-      </div>
+      <AuthForm formType="login" />
     </BackgroundGradientAnimation>
   );
 };
