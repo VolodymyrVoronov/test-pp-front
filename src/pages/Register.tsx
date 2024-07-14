@@ -5,7 +5,7 @@ import AuthForm from "../components/AuthForm";
 
 const Register = (): JSX.Element => {
   return (
-    <div className="bg-background relative flex h-screen w-screen items-center justify-center overflow-hidden p-20 md:shadow-xl">
+    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden p-2 md:p-0 md:shadow-xl">
       <AuthForm formType="register" />
 
       <GridPattern

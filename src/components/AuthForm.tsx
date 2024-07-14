@@ -1,9 +1,14 @@
-import { EyeClosedIcon, EyeOpenIcon, EnterIcon } from "@radix-ui/react-icons";
+import {
+  EnterIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
+  PersonIcon,
+} from "@radix-ui/react-icons";
+import { useKeyPress } from "ahooks";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChangeEvent, ComponentProps, useState } from "react";
 import { TextField } from "react-aria-components";
 import { useNavigate } from "react-router-dom";
-import { useKeyPress } from "ahooks";
 
 import { ROUTES } from "../constants/constants";
 import { IFormType, IUserData } from "../types/types";
@@ -60,7 +65,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
   };
 
   return (
-    <Card className="z-20 bg-white p-5 text-gray-700 shadow-2xl md:p-10">
+    <Card className="z-20 rounded-none bg-white p-5 text-gray-700 shadow-2xl md:p-10">
       {formType === "register" ? (
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-semibold">Welcome to The App</h1>
@@ -72,7 +77,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
         </h1>
       )}
 
-      <div className="mt-10 grid w-[320px] grid-cols-1 gap-5 sm:w-[400px]">
+      <div className="mt-10 grid w-auto grid-cols-1 gap-5 sm:w-[400px]">
         <TextField className="grid w-full max-w-sm items-center gap-1.5">
           <Label className="text-lg">Username:</Label>
           <Input
@@ -140,6 +145,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             className="w-full"
           >
             Register
+            <PersonIcon className="ml-2 h-4 w-4" />
           </Button>
         ) : null}
 
