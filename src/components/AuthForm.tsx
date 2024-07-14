@@ -68,7 +68,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
     <Card className="z-20 rounded-none bg-white p-5 text-gray-700 shadow-2xl md:p-10">
       {formType === "register" ? (
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold">Welcome to The App</h1>
+          <h1 className="text-2xl font-semibold">Welcome to PP App</h1>
           <span>Create an account or login if you already have one</span>
         </div>
       ) : (
