@@ -7,6 +7,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import { ROUTES } from "./constants/constants.ts";
 
@@ -64,5 +65,6 @@ const router = createHashRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </React.StrictMode>,
 );

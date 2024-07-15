@@ -1,21 +1,23 @@
-import {
-  ArrowLeftIcon,
-  EnterIcon,
-  EyeClosedIcon,
-  EyeOpenIcon,
-  PersonIcon,
-} from "@radix-ui/react-icons";
 import { useKeyPress } from "ahooks";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, Eye, EyeOff, LogIn, UserRound } from "lucide-react";
 import { ChangeEvent, ComponentProps, useState } from "react";
 import { TextField } from "react-aria-components";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../constants/constants";
-import { IFormType, IUserData } from "../types/types";
+import { login, register } from "../services/authApi";
+import {
+  FormType,
+  ILoginErrorResponse,
+  IRegisterErrorResponse,
+  IUserData,
+} from "../types/types";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/Card";
+import CopyButton from "./ui/CopyButton";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
@@ -25,7 +27,7 @@ const initialUserData: IUserData = {
 };
 
 interface IAuthFormProps extends ComponentProps<"div"> {
-  formType: IFormType;
+  formType: FormType;
 }
 
 const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
@@ -51,18 +53,74 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
     setShowPassword((prev) => !prev);
   };
 
-  const onRegisterButtonClick = (): void => {
-    console.log(userData);
+  const onRegisterButtonClick = async (): Promise<void> => {
+    const response = await register(userData);
+
+    if (response.success) {
+      setUserData(initialUserData);
+
+      toast.success("Account created successfully");
+
+      toast(
+        (t) => (
+          <div className="flex flex-col gap-2">
+            <p className="text-md text-center">
+              Your secret key (use this to generate OTPs).
+            </p>
+
+            <CopyButton
+              stringToCopy={response.data.secret}
+              onClick={() => {
+                const timeoutId = setTimeout(() => {
+                  toast.dismiss(t.id);
+
+                  navigate(ROUTES.LOGIN);
+
+                  clearTimeout(timeoutId);
+                }, 3000);
+              }}
+            />
+          </div>
+        ),
+        {
+          duration: Infinity,
+        },
+      );
+    }
+
+    if (!response.success) {
+      const { error } = response.error as IRegisterErrorResponse;
+
+      toast.error(error);
+    }
   };
 
-  const onLoginButtonClick = (): void => {
+  const onLoginButtonClick = async (): Promise<void> => {
     if (formType === "register") {
       navigate(ROUTES.LOGIN);
 
       return;
     }
 
-    console.log(userData);
+    const response = await login(userData);
+
+    if (response.success) {
+      setUserData(initialUserData);
+
+      toast.success("Login successful");
+
+      const timeoutId = setTimeout(() => {
+        navigate(ROUTES.VERIFY);
+
+        clearTimeout(timeoutId);
+      }, 3000);
+    }
+
+    if (!response.success) {
+      const { error } = response.error as ILoginErrorResponse;
+
+      toast.error(error);
+    }
   };
 
   const onBackButtonClick = (): void => {
@@ -123,7 +181,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <EyeClosedIcon className="size-5" />
+                    <EyeOff className="size-5" />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -132,7 +190,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <EyeOpenIcon className="size-5" />
+                    <Eye className="size-5" />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -150,7 +208,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             className="w-full"
           >
             Register
-            <PersonIcon className="ml-2 h-4 w-4" />
+            <UserRound className="ml-2 h-4 w-4" />
           </Button>
         ) : (
           <Button
@@ -159,7 +217,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             variant="secondary"
             className="w-full"
           >
-            <ArrowLeftIcon className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
         )}
@@ -174,7 +232,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
           }
         >
           Login
-          <EnterIcon className="ml-2 h-4 w-4" />
+          <LogIn className="ml-2 h-4 w-4" />
         </Button>
       </div>
     </Card>
