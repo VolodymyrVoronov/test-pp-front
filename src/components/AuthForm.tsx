@@ -8,12 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../constants/constants";
 import { login, register } from "../services/authApi";
-import {
-  FormType,
-  ILoginErrorResponse,
-  IRegisterErrorResponse,
-  IUserData,
-} from "../types/types";
+import { FormType, IUserData } from "../types/types";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/Card";
@@ -56,6 +51,8 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
   const onRegisterButtonClick = async (): Promise<void> => {
     const response = await register(userData);
 
+    console.log(response);
+
     if (response.success) {
       setUserData(initialUserData);
 
@@ -69,9 +66,13 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
     }
 
     if (!response.success) {
-      const { error } = response.error as IRegisterErrorResponse;
+      if (typeof response.error === "string") {
+        toast.error(response.error);
+      } else {
+        const { error } = response.error;
 
-      toast.error(error);
+        toast.error(error);
+      }
     }
   };
 
@@ -117,9 +118,13 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
     }
 
     if (!response.success) {
-      const { error } = response.error as ILoginErrorResponse;
+      if (typeof response.error === "string") {
+        toast.error(response.error);
+      } else {
+        const { error } = response.error;
 
-      toast.error(error);
+        toast.error(error);
+      }
     }
   };
 

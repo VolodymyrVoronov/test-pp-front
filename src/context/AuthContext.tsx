@@ -9,7 +9,6 @@ import {
 import toast from "react-hot-toast";
 
 import { checkAuth } from "../services/authApi";
-import { ICheckAuthErrorResponse } from "../types/types";
 
 interface IAuthContext {
   isAuthenticated: boolean;
@@ -31,9 +30,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       if (!response.success) {
-        const { error } = response.error as ICheckAuthErrorResponse;
+        if (typeof response.error === "string") {
+          toast.error(response.error);
+        } else {
+          const { error } = response.error;
 
-        toast.error(error);
+          toast.error(error);
+        }
       }
 
       setIsLoading(false);

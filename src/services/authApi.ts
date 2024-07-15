@@ -33,6 +33,8 @@ export const register = async (data: IUserData): Promise<RegisterResult> => {
 
       if (axiosError.response?.data) {
         return { success: false, error: axiosError.response.data };
+      } else {
+        return { success: false, error: "An unknown error occurred" };
       }
     }
 

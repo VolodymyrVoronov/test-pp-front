@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../constants/constants";
 import { verify } from "../services/authApi";
-import { IVerifyErrorResponse } from "../types/types";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/Card";
@@ -40,9 +39,13 @@ const VerifyForm = (): JSX.Element => {
     }
 
     if (!response.success) {
-      const { error } = response.error as IVerifyErrorResponse;
+      if (typeof response.error === "string") {
+        toast.error(response.error);
+      } else {
+        const { error } = response.error;
 
-      toast.error(error);
+        toast.error(error);
+      }
     }
   };
 
