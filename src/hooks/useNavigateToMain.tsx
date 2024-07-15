@@ -8,7 +8,7 @@ export function useNavigateToMain(type: "token" | "otp" = "token"): void {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkTokenAndNavigate = (): void => {
+    const checkAuthAndNavigate = (): void => {
       const token = isAuthenticated();
       const isOtp = isOpt();
 
@@ -21,12 +21,12 @@ export function useNavigateToMain(type: "token" | "otp" = "token"): void {
       }
     };
 
-    checkTokenAndNavigate();
+    checkAuthAndNavigate();
 
-    document.addEventListener("visibilitychange", checkTokenAndNavigate);
+    document.addEventListener("visibilitychange", checkAuthAndNavigate);
 
     return () => {
-      document.removeEventListener("visibilitychange", checkTokenAndNavigate);
+      document.removeEventListener("visibilitychange", checkAuthAndNavigate);
     };
   }, [navigate, type]);
 }
