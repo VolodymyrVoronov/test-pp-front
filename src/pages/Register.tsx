@@ -1,9 +1,12 @@
+import { useNavigateToMain } from "../hooks/useNavigateToMain";
 import { cn } from "../lib/utils";
 
-import GridPattern from "../components/ui/grid-pattern";
 import AuthForm from "../components/AuthForm";
+import GridPattern from "../components/ui/grid-pattern";
 
 const Register = (): JSX.Element => {
+  useNavigateToMain();
+
   return (
     <div className="relative flex h-screen w-screen items-center justify-center overflow-auto p-2 md:p-0">
       <AuthForm formType="register" />

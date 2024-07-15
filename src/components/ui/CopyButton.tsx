@@ -34,7 +34,7 @@ const CopyButton = ({
       variant="default"
       size="sm"
       className={cn({
-        "bg-green-500 hover:bg-green-500": clipboard.copied,
+        "bg-green-500 text-white hover:bg-green-500": clipboard.copied,
       })}
       {...props}
     >

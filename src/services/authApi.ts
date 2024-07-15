@@ -83,6 +83,8 @@ export const verify = async (data: string): Promise<VerifyResult> => {
       },
     );
 
+    document.cookie = `opt=true; path=/`;
+
     return { success: true, data: response.data };
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -134,6 +136,7 @@ export const checkAuth = async (): Promise<CheckAuthResult> => {
 
 export const logout = async (): Promise<void> => {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "opt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 };
 
 export const isAuthenticated = (): boolean => {
@@ -143,4 +146,13 @@ export const isAuthenticated = (): boolean => {
     ?.split("=")[1];
 
   return !!token;
+};
+
+export const isOpt = (): boolean => {
+  const opt = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith("opt="))
+    ?.split("=")[1];
+
+  return !!opt;
 };
