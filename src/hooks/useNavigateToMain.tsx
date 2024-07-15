@@ -1,32 +1,31 @@
+import { useLocalStorage } from "@mantine/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../constants/constants";
-import { isAuthenticated, isOpt } from "../services/authApi";
+import { isAuthenticated } from "../services/authApi";
 
-export function useNavigateToMain(type: "token" | "otp" = "token"): void {
+export function useNavigateToMain(): void {
   const navigate = useNavigate();
 
+  const [user] = useLocalStorage<string | null>({
+    key: "pp-user",
+    defaultValue: null,
+  });
+
   useEffect(() => {
-    const checkAuthAndNavigate = (): void => {
-      const token = isAuthenticated();
-      const isOtp = isOpt();
-
-      if (token && type === "token") {
-        navigate(ROUTES.MAIN, { replace: true });
-      }
-
-      if (isOtp && type === "otp") {
+    const checkUserAndNavigate = (): void => {
+      if (user && isAuthenticated()) {
         navigate(ROUTES.MAIN, { replace: true });
       }
     };
 
-    checkAuthAndNavigate();
+    checkUserAndNavigate();
 
-    document.addEventListener("visibilitychange", checkAuthAndNavigate);
+    document.addEventListener("visibilitychange", checkUserAndNavigate);
 
     return () => {
-      document.removeEventListener("visibilitychange", checkAuthAndNavigate);
+      document.removeEventListener("visibilitychange", checkUserAndNavigate);
     };
-  }, [navigate, type]);
+  }, [navigate, user]);
 }

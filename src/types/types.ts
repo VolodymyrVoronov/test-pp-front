@@ -32,6 +32,7 @@ export type LoginResult =
 
 export interface IVerifySuccessResponse {
   message: string;
+  username: string;
 }
 
 export interface IVerifyErrorResponse {
@@ -44,7 +45,6 @@ export type VerifyResult =
 
 export interface ICheckAuthSuccessResponse {
   message: string;
-  username: string;
 }
 
 export interface ICheckAuthErrorResponse {

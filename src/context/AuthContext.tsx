@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import toast from "react-hot-toast";
-import { useLocalStorage } from "@mantine/hooks";
 
 import { checkAuth } from "../services/authApi";
 
@@ -19,11 +18,6 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [, setUser] = useLocalStorage<string | null>({
-    key: "pp-user",
-    defaultValue: null,
-  });
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,8 +27,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (response.success) {
         setIsAuthenticated(true);
-
-        setUser(response.data.username);
       }
 
       if (!response.success) {

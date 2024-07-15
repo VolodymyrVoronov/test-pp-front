@@ -1,5 +1,7 @@
 import { cn } from "../lib/utils";
 
+import LogoutButton from "../components/LogoutButton";
+import Profile from "../components/Profile";
 import GridPattern from "../components/ui/grid-pattern";
 
 const Main = (): JSX.Element => {
@@ -13,6 +15,9 @@ const Main = (): JSX.Element => {
         strokeDasharray={"4 2"}
         className={cn("[mask-image:radial-gradient(white,white,transparent)]")}
       />
+
+      <Profile className="absolute right-2 top-2" />
+      <LogoutButton className="absolute bottom-2 right-2" />
     </div>
   );
 };

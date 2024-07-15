@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { TextField } from "react-aria-components";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "@mantine/hooks";
 
 import { ROUTES } from "../constants/constants";
 import { verify } from "../services/authApi";
@@ -14,6 +15,11 @@ import { Label } from "./ui/label";
 
 const VerifyForm = (): JSX.Element => {
   const navigate = useNavigate();
+
+  const [, setUser] = useLocalStorage<string | null>({
+    key: "pp-user",
+    defaultValue: null,
+  });
 
   const [otp, setOtp] = useState("");
 
@@ -33,6 +39,7 @@ const VerifyForm = (): JSX.Element => {
 
       const timeoutId = setTimeout(() => {
         navigate(ROUTES.MAIN);
+        setUser(response.data.username);
 
         clearTimeout(timeoutId);
       }, 2000);

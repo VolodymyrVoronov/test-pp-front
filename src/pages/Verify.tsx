@@ -4,7 +4,7 @@ import { BackgroundGradientAnimation } from "../components/ui/background-gradien
 import VerifyForm from "../components/VerifyForm";
 
 const Verify = (): JSX.Element => {
-  useNavigateToMain("otp");
+  useNavigateToMain();
 
   return (
     <BackgroundGradientAnimation className="absolute inset-0 flex items-center justify-center overflow-auto p-2 md:p-0">
