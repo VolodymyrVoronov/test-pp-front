@@ -61,31 +61,11 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
 
       toast.success("Account created successfully");
 
-      toast(
-        (t) => (
-          <div className="flex flex-col gap-2">
-            <p className="text-md text-center">
-              Your secret key (use this to generate OTPs).
-            </p>
+      const timeoutId = setTimeout(() => {
+        navigate(ROUTES.LOGIN);
 
-            <CopyButton
-              stringToCopy={response.data.secret}
-              onClick={() => {
-                const timeoutId = setTimeout(() => {
-                  toast.dismiss(t.id);
-
-                  navigate(ROUTES.LOGIN);
-
-                  clearTimeout(timeoutId);
-                }, 3000);
-              }}
-            />
-          </div>
-        ),
-        {
-          duration: Infinity,
-        },
-      );
+        clearTimeout(timeoutId);
+      }, 2000);
     }
 
     if (!response.success) {
@@ -109,11 +89,31 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
 
       toast.success("Login successful");
 
-      const timeoutId = setTimeout(() => {
-        navigate(ROUTES.VERIFY);
+      toast(
+        (t) => (
+          <div className="flex flex-col gap-2">
+            <p className="text-md text-center">
+              Your secret key (use this to generate OTPs): {response.data.otp}.
+            </p>
 
-        clearTimeout(timeoutId);
-      }, 3000);
+            <CopyButton
+              stringToCopy={response.data.otp}
+              onClick={() => {
+                const timeoutId = setTimeout(() => {
+                  toast.dismiss(t.id);
+
+                  navigate(ROUTES.VERIFY);
+
+                  clearTimeout(timeoutId);
+                }, 2000);
+              }}
+            />
+          </div>
+        ),
+        {
+          duration: Infinity,
+        },
+      );
     }
 
     if (!response.success) {

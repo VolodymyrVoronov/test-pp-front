@@ -19,6 +19,7 @@ export type RegisterResult =
 
 export interface ILoginSuccessResponse {
   token: string;
+  otp: string;
 }
 
 export interface ILoginErrorResponse {
@@ -28,3 +29,15 @@ export interface ILoginErrorResponse {
 export type LoginResult =
   | { success: true; data: ILoginSuccessResponse }
   | { success: false; error: ILoginErrorResponse | string };
+
+export interface IVerifySuccessResponse {
+  message: string;
+}
+
+export interface IVerifyErrorResponse {
+  error: string;
+}
+
+export type VerifyResult =
+  | { success: true; data: IVerifySuccessResponse }
+  | { success: false; error: IVerifyErrorResponse | string };

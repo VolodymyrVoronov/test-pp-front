@@ -1,21 +1,22 @@
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 import {
   createHashRouter,
   Navigate,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
 import { ROUTES } from "./constants/constants.ts";
 
-import PageTransition from "./components/PageTransition.tsx";
 import Login from "./pages/Login.tsx";
 import Main from "./pages/Main.tsx";
 import Register from "./pages/Register.tsx";
 import Verify from "./pages/Verify.tsx";
+
+import PageTransition from "./components/PageTransition.tsx";
 
 import "./index.css";
 
@@ -64,7 +65,8 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
     <Toaster />
+
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
