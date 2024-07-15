@@ -3,6 +3,7 @@ import { cn } from "../lib/utils";
 import LogoutButton from "../components/LogoutButton";
 import Profile from "../components/Profile";
 import GridPattern from "../components/ui/grid-pattern";
+import { Tooltip, TooltipTrigger } from "../components/ui/tooltip";
 
 const Main = (): JSX.Element => {
   return (
@@ -16,8 +17,15 @@ const Main = (): JSX.Element => {
         className={cn("[mask-image:radial-gradient(white,white,transparent)]")}
       />
 
-      <Profile className="absolute right-2 top-2" />
-      <LogoutButton className="absolute bottom-2 right-2" />
+      <Profile className="absolute right-2 top-2 shadow-xl" />
+
+      <TooltipTrigger>
+        <LogoutButton
+          className="absolute bottom-2 right-2 rounded-2xl shadow-xl"
+          variant="destructive"
+        />
+        <Tooltip>Logout</Tooltip>
+      </TooltipTrigger>
     </div>
   );
 };

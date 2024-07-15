@@ -16,7 +16,7 @@ const Profile = ({ className, ...props }: IProfileProps): JSX.Element => {
   return (
     <div
       className={cn(
-        "relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-[#77e3ff]",
+        "relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl bg-[#77e3ff]",
         className,
       )}
       {...props}
