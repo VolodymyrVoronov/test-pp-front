@@ -111,9 +111,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             />
           </div>
         ),
-        {
-          duration: Infinity,
-        },
+        { duration: Infinity },
       );
     }
 
