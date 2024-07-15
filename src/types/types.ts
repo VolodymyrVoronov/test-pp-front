@@ -41,3 +41,16 @@ export interface IVerifyErrorResponse {
 export type VerifyResult =
   | { success: true; data: IVerifySuccessResponse }
   | { success: false; error: IVerifyErrorResponse | string };
+
+export interface ICheckAuthSuccessResponse {
+  message: string;
+  username: string;
+}
+
+export interface ICheckAuthErrorResponse {
+  error: string;
+}
+
+export type CheckAuthResult =
+  | { success: true; data: ICheckAuthSuccessResponse }
+  | { success: false; error: ICheckAuthErrorResponse | string };

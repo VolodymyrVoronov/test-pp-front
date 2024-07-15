@@ -1,6 +1,9 @@
 import axios, { AxiosError } from "axios";
 
 import {
+  CheckAuthResult,
+  ICheckAuthErrorResponse,
+  ICheckAuthSuccessResponse,
   ILoginErrorResponse,
   ILoginSuccessResponse,
   IRegisterErrorResponse,
@@ -56,6 +59,8 @@ export const login = async (data: IUserData): Promise<LoginResult> => {
 
       if (axiosError.response?.data) {
         return { success: false, error: axiosError.response.data };
+      } else {
+        return { success: false, error: "An unknown error occurred" };
       }
     }
 
@@ -83,6 +88,8 @@ export const verify = async (data: string): Promise<VerifyResult> => {
 
       if (axiosError.response?.data) {
         return { success: false, error: axiosError.response.data };
+      } else {
+        return { success: false, error: "An unknown error occurred" };
       }
     }
 
@@ -92,4 +99,46 @@ export const verify = async (data: string): Promise<VerifyResult> => {
         error instanceof Error ? error.message : "An unknown error occurred",
     };
   }
+};
+
+export const checkAuth = async (): Promise<CheckAuthResult> => {
+  try {
+    const response = await authApi.get<ICheckAuthSuccessResponse>(
+      "/auth/check-auth",
+      {
+        withCredentials: true,
+      },
+    );
+
+    return { success: true, data: response.data };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<ICheckAuthErrorResponse>;
+
+      if (axiosError.response?.data) {
+        return { success: false, error: axiosError.response.data };
+      } else {
+        return { success: false, error: "An unknown error occurred" };
+      }
+    }
+
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
+};
+
+export const logout = async (): Promise<void> => {
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+};
+
+export const isAuthenticated = (): boolean => {
+  const token = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith("token="))
+    ?.split("=")[1];
+
+  return !!token;
 };

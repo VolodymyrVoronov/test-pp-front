@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
@@ -16,6 +15,9 @@ import Main from "./pages/Main.tsx";
 import Register from "./pages/Register.tsx";
 import Verify from "./pages/Verify.tsx";
 
+import { AuthProvider } from "./context/AuthContext.tsx";
+
+import AuthWrapper from "./components/AuthWrapper.tsx";
 import PageTransition from "./components/PageTransition.tsx";
 
 import "./index.css";
@@ -26,27 +28,39 @@ const router = createHashRouter([
   {
     path: ROUTES.ROOT,
     element: (
-      <div className="flex h-screen w-screen overflow-hidden">
-        <AnimatePresence>
+      <PageTransition>
+        <Navigate to={ROUTES.REGISTER} replace={true} />
+      </PageTransition>
+    ),
+  },
+  {
+    element: (
+      <PageTransition>
+        <Register />
+      </PageTransition>
+    ),
+    path: ROUTES.REGISTER,
+  },
+  {
+    element: (
+      <PageTransition>
+        <Login />
+      </PageTransition>
+    ),
+    path: ROUTES.LOGIN,
+  },
+  {
+    path: ROUTES.ROOT,
+    element: (
+      <AuthProvider>
+        <AuthWrapper>
           <PageTransition>
             <Outlet />
           </PageTransition>
-        </AnimatePresence>
-      </div>
+        </AuthWrapper>
+      </AuthProvider>
     ),
     children: [
-      {
-        path: ROUTES.ROOT,
-        element: <Navigate to={ROUTES.REGISTER} replace={true} />,
-      },
-      {
-        element: <Register />,
-        path: ROUTES.REGISTER,
-      },
-      {
-        element: <Login />,
-        path: ROUTES.LOGIN,
-      },
       {
         element: <Verify />,
         path: ROUTES.VERIFY,

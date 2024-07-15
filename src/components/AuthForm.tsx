@@ -93,7 +93,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
         (t) => (
           <div className="flex flex-col gap-2">
             <p className="text-md text-center">
-              Your secret key (use this to generate OTPs): {response.data.otp}.
+              A one-time code has been sent: {response.data.otp}.
             </p>
 
             <CopyButton
