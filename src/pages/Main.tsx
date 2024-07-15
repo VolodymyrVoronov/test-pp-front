@@ -19,7 +19,7 @@ const Main = (): JSX.Element => {
 
       <Profile className="absolute right-2 top-2 shadow-xl" />
 
-      <TooltipTrigger>
+      <TooltipTrigger delay={0}>
         <LogoutButton
           className="absolute bottom-2 right-2 rounded-2xl shadow-xl"
           variant="destructive"
