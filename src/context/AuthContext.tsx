@@ -1,3 +1,4 @@
+import { useLocalStorage } from "@mantine/hooks";
 import {
   createContext,
   ReactNode,
@@ -9,7 +10,6 @@ import {
 import toast from "react-hot-toast";
 
 import { checkAuth } from "../services/authApi";
-import { useLocalStorage } from "@mantine/hooks";
 
 interface IAuthContext {
   isAuthenticated: boolean;
