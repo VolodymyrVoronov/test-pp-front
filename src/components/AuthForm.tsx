@@ -30,6 +30,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
 
   const [userData, setUserData] = useState<IUserData>(initialUserData);
   const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState("");
 
   useKeyPress("Esc", () => {
     if (userData.username || userData.password) {
@@ -50,8 +51,6 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
 
   const onRegisterButtonClick = async (): Promise<void> => {
     const response = await register(userData);
-
-    console.log(response);
 
     if (response.success) {
       setUserData(initialUserData);
@@ -87,6 +86,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
 
     if (response.success) {
       setUserData(initialUserData);
+      setOtp(response.data.otp);
 
       toast.success("Login successful");
 
@@ -156,6 +156,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             autoFocus
             required
             className="text-lg"
+            disabled={!!otp}
           />
         </TextField>
 
@@ -170,6 +171,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
               type={showPassword ? "text" : "password"}
               required
               className="text-lg"
+              disabled={!!otp}
             />
 
             <Button
@@ -221,6 +223,7 @@ const AuthForm = ({ formType = "register" }: IAuthFormProps): JSX.Element => {
             type="button"
             variant="secondary"
             className="w-full"
+            isDisabled={!!otp}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
