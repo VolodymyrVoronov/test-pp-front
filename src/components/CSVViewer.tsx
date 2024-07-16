@@ -21,8 +21,6 @@ const CSVViewer = (): JSX.Element => {
     useShallow((state) => [state.parsedCSVFile, state.setCurrentStep]),
   );
 
-  console.log(parsedCSVFile);
-
   const onPreviousStepButtonClick = (): void => {
     setCurrentStep(0);
   };
@@ -71,7 +69,10 @@ const CSVViewer = (): JSX.Element => {
             For successful price prediction and chart visualization, we need at
             least 4 rows of data.
           </span>
+
           <span className="font-semibold">Date, open, high, low, close.</span>
+
+          <i>Please keep exact this order of the columns.</i>
         </AlertDescription>
       </Alert>
 

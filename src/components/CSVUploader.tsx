@@ -1,12 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FileTrigger, Text } from "react-aria-components";
+import toast from "react-hot-toast";
 import { useShallow } from "zustand/react/shallow";
 
+import { checkFileFormat } from "../lib/checkFileFormat";
 import { useAppStore } from "../store/app";
 
 import { BorderBeam } from "./ui/border-beam";
 import { Button } from "./ui/button";
 import { DropZone } from "./ui/dropzone";
+
+const errorUploadFileMessage =
+  "Invalid file format. Only CSV files are allowed";
 
 const CSVUploader = (): JSX.Element => {
   const [fileName, setCurrentStep, setCSVFile, resetCSVFile, setFileName] =
@@ -45,6 +50,12 @@ const CSVUploader = (): JSX.Element => {
             if (files) {
               const file = await files[0].getFile();
 
+              if (!checkFileFormat(file, "csv")) {
+                toast.error(errorUploadFileMessage);
+
+                return;
+              }
+
               const reader = new FileReader();
               reader.onload = async (event) => {
                 const csv = event.target?.result as string;
@@ -66,6 +77,13 @@ const CSVUploader = (): JSX.Element => {
             try {
               if (files) {
                 const file = files[0];
+
+                if (!checkFileFormat(file, "csv")) {
+                  toast.error(errorUploadFileMessage);
+
+                  return;
+                }
+
                 const reader = new FileReader();
                 reader.onload = async (event) => {
                   const csv = event.target?.result as string;
