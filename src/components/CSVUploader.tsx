@@ -37,7 +37,7 @@ const CSVUploader = (): JSX.Element => {
   return (
     <div className="flex flex-col gap-10">
       <DropZone
-        className="relative z-40 h-[200px] w-[300px] rounded-md bg-white p-5 shadow-2xl md:w-[400px]"
+        className="relative z-40 h-[200px] w-[300px] rounded-md bg-white p-5 shadow-xl md:w-[400px]"
         onDrop={async (e) => {
           try {
             const files = e.items.filter((item) => item.kind === "file");
@@ -82,12 +82,12 @@ const CSVUploader = (): JSX.Element => {
           }}
           acceptedFileTypes={["text/csv"]}
         >
-          <Button variant="default" size="lg" className="text-xl">
+          <Button variant="default" size="lg" className="lg:text-xl">
             Select file
           </Button>
         </FileTrigger>
 
-        <Text slot="label" className="text-center text-xl">
+        <Text slot="label" className="text-center lg:text-xl">
           Drop file
         </Text>
 
@@ -100,11 +100,11 @@ const CSVUploader = (): JSX.Element => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="z-40 h-auto w-[300px] space-y-5 rounded-md bg-white p-5 text-center shadow-2xl md:w-[400px]"
+            className="z-40 h-auto w-[300px] space-y-5 rounded-md bg-white p-5 text-center shadow-xl md:w-[400px]"
           >
             <div className="flex flex-col gap-2">
               <h3>File you have uploaded:</h3>
-              <p className="text-center text-xl font-semibold">{fileName}</p>
+              <p className="text-center font-semibold lg:text-xl">{fileName}</p>
             </div>
 
             <div className="flex flex-row justify-center gap-5">

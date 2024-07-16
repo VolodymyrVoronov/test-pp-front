@@ -42,7 +42,7 @@ const Steps = ({ className, ...props }: IStepsProps): JSX.Element => {
       {...props}
     >
       <div className="flex flex-row justify-center">
-        <h2 className="flex flex-col gap-2 text-center text-3xl">
+        <h2 className="flex flex-col gap-2 text-center text-xl lg:text-3xl">
           <span className="mt-0.5 text-nowrap">
             Step{" "}
             <AnimatePresence mode="wait">
