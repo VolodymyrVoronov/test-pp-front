@@ -15,6 +15,44 @@ const PredictionInput = (): JSX.Element => {
 
   console.log(parsedCSVFile);
 
+  const onStartPredictionButtonClick = async (): Promise<void> => {
+    const processedData = parsedCSVFile?.data.map((row) => {
+      const processedRow: Record<string, string | number> = {};
+
+      Object.keys(row).forEach((key) => {
+        switch (key) {
+          case "Date":
+          case "date":
+            processedRow["date"] = row[key];
+            break;
+          case "Open":
+          case "open":
+            processedRow["open"] = row[key];
+            break;
+          case "High":
+          case "high":
+            processedRow["high"] = row[key];
+            break;
+          case "Low":
+          case "low":
+            processedRow["low"] = row[key];
+            break;
+
+          case "Close":
+          case "close":
+            processedRow["close"] = row[key];
+            break;
+          default:
+            break;
+        }
+      });
+
+      return processedRow;
+    });
+
+    console.log("onStartPredictionButtonClick", processedData);
+  };
+
   const onPreviousStepButtonClick = (): void => {
     setCurrentStep(1);
   };
@@ -27,8 +65,9 @@ const PredictionInput = (): JSX.Element => {
     <div className="relative z-40 flex h-auto flex-col gap-10 rounded-md bg-white p-5 text-center shadow-xl">
       <div className="relative flex h-[320px] w-[320px] items-center justify-center lg:h-[350px] lg:w-[450px]">
         <Button
-          className="relative z-40 flex size-56 flex-col gap-2 rounded-full text-2xl transition-all hover:scale-105"
+          className="relative z-40 flex size-56 flex-col gap-2 rounded-full text-2xl transition-all hover:scale-105 active:scale-100"
           size="sm"
+          onPress={onStartPredictionButtonClick}
         >
           {/* <span className="absolute z-[-1] inline-flex size-40 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span> */}
           <span>Start Prediction</span>

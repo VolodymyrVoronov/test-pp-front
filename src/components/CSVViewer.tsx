@@ -72,7 +72,7 @@ const CSVViewer = (): JSX.Element => {
 
           <span className="font-semibold">Date, open, high, low, close.</span>
 
-          <i>Please keep exact this order of the columns.</i>
+          <i>Please keep exact order of the columns and names.</i>
         </AlertDescription>
       </Alert>
 
