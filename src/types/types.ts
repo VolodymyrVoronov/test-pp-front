@@ -1,3 +1,5 @@
+import { ParseError, ParseMeta } from "papaparse";
+
 export interface IUserData {
   username: string;
   password: string;
@@ -56,12 +58,11 @@ export type CheckAuthResult =
   | { success: false; error: ICheckAuthErrorResponse | string };
 
 export interface IParsedCSVFile {
-  meta: {
-    fields: string[];
-  };
+  meta: ParseMeta;
   data: {
     [key: string]: string;
   }[];
+  errors: ParseError[];
 }
 
 export interface IStep {

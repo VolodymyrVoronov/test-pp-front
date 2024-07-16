@@ -24,7 +24,7 @@ type StoreWithActions = IAppStore & IAppActions;
 export const useAppStore = create<StoreWithActions>()(
   immer(
     persist(
-      (set, get) => ({
+      (set) => ({
         rawCSVFile: null,
         parsedCSVFile: null,
         fileName: "",
