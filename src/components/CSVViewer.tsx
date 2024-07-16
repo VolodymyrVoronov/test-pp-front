@@ -28,7 +28,7 @@ const CSVViewer = (): JSX.Element => {
   };
 
   const onNextStepButtonClick = (): void => {
-    setCurrentStep(1);
+    setCurrentStep(2);
   };
 
   return (
