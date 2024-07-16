@@ -17,6 +17,7 @@ const DaysToPredictInput = (): JSX.Element => {
   const onDayToPredictChange = (value: number): void => {
     setDayToPredict(value);
   };
+
   return (
     <NumberField
       minValue={1}
