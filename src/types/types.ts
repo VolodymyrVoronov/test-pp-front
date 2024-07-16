@@ -54,3 +54,17 @@ export interface ICheckAuthErrorResponse {
 export type CheckAuthResult =
   | { success: true; data: ICheckAuthSuccessResponse }
   | { success: false; error: ICheckAuthErrorResponse | string };
+
+export interface IParsedCSVFile {
+  meta: {
+    fields: string[];
+  };
+  data: {
+    [key: string]: string;
+  }[];
+}
+
+export interface IStep {
+  stepName: string;
+  stepComponent: JSX.Element;
+}

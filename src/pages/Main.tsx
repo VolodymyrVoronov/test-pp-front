@@ -2,13 +2,16 @@ import { cn } from "../lib/utils";
 
 import LogoutButton from "../components/LogoutButton";
 import Profile from "../components/Profile";
+import Steps from "../components/Steps";
 import GridPattern from "../components/ui/grid-pattern";
 import { Tooltip, TooltipTrigger } from "../components/ui/tooltip";
 
 const Main = (): JSX.Element => {
   return (
-    <div className="relative grid h-screen w-screen grid-cols-[1fr_auto] gap-5 overflow-auto p-2">
-      <div className="overflow-auto">Main</div>
+    <div className="relative grid h-screen w-screen grid-cols-[1fr_auto] gap-1 overflow-auto p-2 md:gap-5">
+      <div className="overflow-auto">
+        <Steps />
+      </div>
 
       <div className="right-2 top-2 flex flex-col justify-between">
         <Profile className="shadow-xl" />
