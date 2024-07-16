@@ -95,39 +95,45 @@ const CSVUploader = (): JSX.Element => {
       </DropZone>
 
       {fileName ? (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="z-40 h-auto w-[300px] space-y-5 rounded-md bg-white p-5 text-center shadow-xl md:w-[400px]"
-          >
-            <div className="flex flex-col gap-2">
-              <h3>File you have uploaded:</h3>
-              <p className="text-center font-semibold lg:text-xl">{fileName}</p>
-            </div>
+        <div className="relative z-40 h-auto w-[300px] rounded-md bg-white p-5 text-center shadow-xl md:w-[400px]">
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-5"
+            >
+              <div className="flex flex-col gap-2">
+                <h3>File you have uploaded:</h3>
+                <p className="text-center font-semibold lg:text-xl">
+                  {fileName}
+                </p>
+              </div>
 
-            <div className="flex flex-row justify-center gap-5">
-              <Button
-                className="w-full"
-                size="sm"
-                variant="destructive"
-                onPress={onResetButtonClick}
-              >
-                Reset
-              </Button>
+              <div className="flex flex-row justify-center gap-5">
+                <Button
+                  className="w-full"
+                  size="sm"
+                  variant="destructive"
+                  onPress={onResetButtonClick}
+                >
+                  Reset
+                </Button>
 
-              <Button
-                className="w-full"
-                size="sm"
-                variant="secondary"
-                onPress={onNextStepButtonClick}
-              >
-                Next Step
-              </Button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+                <Button
+                  className="w-full"
+                  size="sm"
+                  variant="secondary"
+                  onPress={onNextStepButtonClick}
+                >
+                  Next Step
+                </Button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <BorderBeam size={100} duration={12} delay={9} borderWidth={2} />
+        </div>
       ) : null}
     </div>
   );
