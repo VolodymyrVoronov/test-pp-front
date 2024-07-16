@@ -25,7 +25,7 @@ const DaysToPredictInput = (): JSX.Element => {
       onChange={onDayToPredictChange}
       value={dayToPredict}
     >
-      <Label className="text-lg">Day to predict</Label>
+      <Label className="text-lg">Days to predict</Label>
       <FieldGroup>
         <NumberFieldInput />
         <NumberFieldSteppers />
