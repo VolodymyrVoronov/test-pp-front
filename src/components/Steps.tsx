@@ -49,9 +49,9 @@ const Steps = ({ className, ...props }: IStepsProps): JSX.Element => {
             <AnimatePresence mode="wait">
               <motion.span
                 key={currentStep}
-                initial={{ opacity: 0, filter: "blur(15px)", y: 50 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                exit={{ opacity: 0, filter: "blur(15px)", y: 50 }}
+                initial={{ opacity: 0, filter: "blur(15px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, filter: "blur(15px)" }}
                 transition={{ duration: 0.5 }}
                 className="relative me-2 rounded-full bg-[#77e3ff] px-3 font-medium"
               >
@@ -59,7 +59,19 @@ const Steps = ({ className, ...props }: IStepsProps): JSX.Element => {
               </motion.span>
             </AnimatePresence>
           </span>
-          <span className="text-nowrap">{steps[currentStep].stepName}</span>
+
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentStep}
+              initial={{ opacity: 0, filter: "blur(15px)", x: -50 }}
+              animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+              exit={{ opacity: 0, filter: "blur(15px)", x: 50 }}
+              transition={{ duration: 0.5 }}
+              className="text-nowrap"
+            >
+              {steps[currentStep].stepName}
+            </motion.span>
+          </AnimatePresence>
         </h2>
       </div>
 
