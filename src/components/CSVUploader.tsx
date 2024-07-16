@@ -9,14 +9,16 @@ import { Button } from "./ui/button";
 import { DropZone } from "./ui/dropzone";
 
 const CSVUploader = (): JSX.Element => {
-  const [fileName, setCurrentStep, setCSVFile, setFileName] = useAppStore(
-    useShallow((state) => [
-      state.fileName,
-      state.setCurrentStep,
-      state.setCSVFile,
-      state.setFileName,
-    ]),
-  );
+  const [fileName, setCurrentStep, setCSVFile, resetCSVFile, setFileName] =
+    useAppStore(
+      useShallow((state) => [
+        state.fileName,
+        state.setCurrentStep,
+        state.setCSVFile,
+        state.resetCSVFile,
+        state.setFileName,
+      ]),
+    );
 
   const onCSVUploadChange = (file: string, fileName: string): void => {
     setCSVFile(file);
@@ -25,6 +27,11 @@ const CSVUploader = (): JSX.Element => {
 
   const onNextStepButtonClick = (): void => {
     setCurrentStep(1);
+  };
+
+  const onResetButtonClick = (): void => {
+    resetCSVFile();
+    setFileName("");
   };
 
   return (
@@ -93,14 +100,32 @@ const CSVUploader = (): JSX.Element => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="z-40 h-auto w-[300px] space-y-3 rounded-md bg-white p-5 text-center shadow-2xl md:w-[400px]"
+            className="z-40 h-auto w-[300px] space-y-5 rounded-md bg-white p-5 text-center shadow-2xl md:w-[400px]"
           >
-            <h3>File you have uploaded:</h3>
-            <p className="text-center text-xl font-semibold">{fileName}</p>
+            <div className="flex flex-col gap-2">
+              <h3>File you have uploaded:</h3>
+              <p className="text-center text-xl font-semibold">{fileName}</p>
+            </div>
 
-            <Button variant="default" onPress={onNextStepButtonClick}>
-              Next Step
-            </Button>
+            <div className="flex flex-row justify-center gap-5">
+              <Button
+                className="w-full"
+                size="sm"
+                variant="destructive"
+                onPress={onResetButtonClick}
+              >
+                Reset
+              </Button>
+
+              <Button
+                className="w-full"
+                size="sm"
+                variant="secondary"
+                onPress={onNextStepButtonClick}
+              >
+                Next Step
+              </Button>
+            </div>
           </motion.div>
         </AnimatePresence>
       ) : null}

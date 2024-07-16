@@ -13,6 +13,7 @@ export interface IAppStore {
 
 export interface IAppActions {
   setCSVFile: (file: string) => void;
+  resetCSVFile: () => void;
   setFileName: (file: string) => void;
   setCurrentStep: (step: number) => void;
 }
@@ -36,6 +37,14 @@ export const useAppStore = create(
         state.parsedCSVFile = parsedNewCSVFiles;
       });
     },
+
+    resetCSVFile: () => {
+      set((state) => {
+        state.rawCSVFile = null;
+        state.parsedCSVFile = null;
+      });
+    },
+
     setFileName: (file: string) => {
       set((state) => {
         state.fileName = file;
