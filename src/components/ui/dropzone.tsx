@@ -1,5 +1,3 @@
-"use client";
-
 import {
   DropZone as AriaDropZone,
   DropZoneProps as AriaDropZoneProps,
