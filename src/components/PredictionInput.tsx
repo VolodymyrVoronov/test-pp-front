@@ -73,6 +73,7 @@ const PredictionInput = (): JSX.Element => {
           onPress={onStartPredictionButtonClick}
         >
           <span className="absolute z-[-1] inline-flex size-36 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span>
+
           <Rocket className="size-7" />
 
           <span>Start Prediction</span>
