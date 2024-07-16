@@ -67,7 +67,7 @@ const CSVViewer = (): JSX.Element => {
         <AlertDescription className="mt-3 flex flex-col gap-1">
           <span>
             For successful price prediction and chart visualization, we need at
-            least 4 rows of data.
+            least 5 rows of data.
           </span>
 
           <span className="font-semibold">Date, open, high, low, close.</span>
