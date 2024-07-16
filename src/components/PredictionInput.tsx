@@ -3,6 +3,7 @@ import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "../store/app";
 
+import DaysToPredictInput from "./DaysToPredictInput";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { BorderBeam } from "./ui/border-beam";
 import { Button } from "./ui/button";
@@ -63,6 +64,8 @@ const PredictionInput = (): JSX.Element => {
 
   return (
     <div className="relative z-40 flex h-auto flex-col gap-10 rounded-md bg-white p-5 text-center shadow-xl">
+      <DaysToPredictInput />
+
       <div className="relative flex h-[320px] w-[320px] items-center justify-center lg:h-[350px] lg:w-[450px]">
         <Button
           className="relative z-40 flex size-56 flex-col gap-2 rounded-full text-2xl transition-all hover:scale-105 active:scale-100"
@@ -93,7 +96,7 @@ const PredictionInput = (): JSX.Element => {
 
         <AlertDescription className="mt-3 flex flex-col gap-1">
           The process may take some time. The time depends on the size of your
-          CSV file and Internet connection.
+          CSV file, Internet connection and day to predict.
         </AlertDescription>
       </Alert>
 
