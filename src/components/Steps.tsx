@@ -9,6 +9,7 @@ import { IStep } from "../types/types";
 import CSVUploader from "./CSVUploader";
 import CSVViewer from "./CSVViewer";
 import PredictionInput from "./PredictionInput";
+import PredictionResult from "./PredictionResult";
 
 interface IStepsProps extends ComponentProps<"div"> {}
 
@@ -26,8 +27,8 @@ const steps: IStep[] = [
     stepComponent: <PredictionInput />,
   },
   {
-    stepName: "Result",
-    stepComponent: <div className="bg-green-500">Step 4 Test</div>,
+    stepName: "Prediction result",
+    stepComponent: <PredictionResult />,
   },
 ];
 

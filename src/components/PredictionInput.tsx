@@ -89,7 +89,7 @@ const PredictionInput = (): JSX.Element => {
 
       <Alert
         variant="default"
-        className="w-[320px] text-left text-blue-500 lg:w-[450px]"
+        className="w-[320px] border-blue-500 text-left text-blue-500 lg:w-[450px]"
       >
         <Info className="h-4 w-4 text-[#4d8bf9_!important]" />
         <AlertTitle>Please note</AlertTitle>

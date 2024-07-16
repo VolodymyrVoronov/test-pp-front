@@ -16,7 +16,7 @@ export interface IAppStore {
 export interface IAppActions {
   setCSVFile: (file: string) => void;
   resetCSVFile: () => void;
-  setFileName: (file: string) => void;
+  setFileName: (fileName: string) => void;
   setCurrentStep: (step: number) => void;
   setDayToPredict: (day: number) => void;
 }
@@ -53,9 +53,9 @@ export const useAppStore = create<StoreWithActions>()(
           });
         },
 
-        setFileName: (file: string) => {
+        setFileName: (fileName: string) => {
           set((state) => {
-            state.fileName = file;
+            state.fileName = fileName;
           });
         },
 
