@@ -1,4 +1,4 @@
-import { TriangleAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, TriangleAlert } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "../store/app";
@@ -83,6 +83,7 @@ const CSVViewer = (): JSX.Element => {
           variant="secondary"
           onPress={onPreviousStepButtonClick}
         >
+          <ArrowLeft className="mr-2 h-4 w-4" />
           Previous Step
         </Button>
 
@@ -93,6 +94,7 @@ const CSVViewer = (): JSX.Element => {
           onPress={onNextStepButtonClick}
         >
           Next Step
+          <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
 

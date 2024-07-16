@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, RotateCcw, Upload } from "lucide-react";
 import { FileTrigger, Text } from "react-aria-components";
 import toast from "react-hot-toast";
 import { useShallow } from "zustand/react/shallow";
@@ -102,6 +103,7 @@ const CSVUploader = (): JSX.Element => {
         >
           <Button variant="default" size="lg" className="lg:text-xl">
             Select file
+            <Upload className="ml-2 h-4 w-4" />
           </Button>
         </FileTrigger>
 
@@ -136,6 +138,7 @@ const CSVUploader = (): JSX.Element => {
                   onPress={onResetButtonClick}
                 >
                   Reset
+                  <RotateCcw className="ml-2 h-4 w-4" />
                 </Button>
 
                 <Button
@@ -145,6 +148,7 @@ const CSVUploader = (): JSX.Element => {
                   onPress={onNextStepButtonClick}
                 >
                   Next Step
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </motion.div>

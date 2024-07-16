@@ -1,4 +1,4 @@
-import { Info, Rocket } from "lucide-react";
+import { ArrowLeft, ArrowRight, Info, Rocket } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "../store/app";
@@ -68,12 +68,12 @@ const PredictionInput = (): JSX.Element => {
 
       <div className="relative flex h-[320px] w-[320px] items-center justify-center lg:h-[350px] lg:w-[450px]">
         <Button
-          className="relative z-40 flex size-56 flex-col gap-2 rounded-full text-2xl transition-all hover:scale-105 active:scale-100"
+          className="text-md relative z-40 flex size-44 flex-col gap-2 rounded-full transition-all hover:scale-105 active:scale-100"
           size="sm"
           onPress={onStartPredictionButtonClick}
         >
-          {/* <span className="absolute z-[-1] inline-flex size-40 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span> */}
-          <Rocket className="size-8" />
+          <span className="absolute z-[-1] inline-flex size-36 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span>
+          <Rocket className="size-7" />
 
           <span>Start Prediction</span>
         </Button>
@@ -107,6 +107,7 @@ const PredictionInput = (): JSX.Element => {
           variant="secondary"
           onPress={onPreviousStepButtonClick}
         >
+          <ArrowLeft className="mr-2 h-4 w-4" />
           Previous Step
         </Button>
 
@@ -118,6 +119,7 @@ const PredictionInput = (): JSX.Element => {
           isDisabled
         >
           Get Prediction
+          <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
 
