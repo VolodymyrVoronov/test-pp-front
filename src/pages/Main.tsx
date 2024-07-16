@@ -7,7 +7,21 @@ import { Tooltip, TooltipTrigger } from "../components/ui/tooltip";
 
 const Main = (): JSX.Element => {
   return (
-    <div className="relative flex h-screen w-screen items-center justify-center overflow-auto p-2 md:p-0">
+    <div className="relative grid h-screen w-screen grid-cols-[1fr_auto] gap-5 overflow-auto p-2">
+      <div className="overflow-auto">Main</div>
+
+      <div className="right-2 top-2 flex flex-col justify-between">
+        <Profile className="shadow-xl" />
+
+        <TooltipTrigger delay={0}>
+          <LogoutButton
+            className="rounded-2xl shadow-xl"
+            variant="destructive"
+          />
+          <Tooltip>Logout</Tooltip>
+        </TooltipTrigger>
+      </div>
+
       <GridPattern
         width={30}
         height={30}
@@ -16,16 +30,6 @@ const Main = (): JSX.Element => {
         strokeDasharray={"4 2"}
         className={cn("[mask-image:radial-gradient(white,white,transparent)]")}
       />
-
-      <Profile className="absolute right-2 top-2 shadow-xl" />
-
-      <TooltipTrigger delay={0}>
-        <LogoutButton
-          className="absolute bottom-2 right-2 rounded-2xl shadow-xl"
-          variant="destructive"
-        />
-        <Tooltip>Logout</Tooltip>
-      </TooltipTrigger>
     </div>
   );
 };
