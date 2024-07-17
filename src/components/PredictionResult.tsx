@@ -17,14 +17,16 @@ import {
 } from "./ui/table";
 
 const PredictionResult = (): JSX.Element => {
-  const [predictions, graph, fileName, setCurrentStep] = useAppStore(
-    useShallow((state) => [
-      state.predictions,
-      state.graph,
-      state.fileName,
-      state.setCurrentStep,
-    ]),
-  );
+  const [predictions, graph, fileName, setCurrentStep, resetProcess] =
+    useAppStore(
+      useShallow((state) => [
+        state.predictions,
+        state.graph,
+        state.fileName,
+        state.setCurrentStep,
+        state.resetProcess,
+      ]),
+    );
 
   const onPreviousStepButtonClick = (): void => {
     setCurrentStep(2);
@@ -32,6 +34,7 @@ const PredictionResult = (): JSX.Element => {
 
   const onStartOverButtonClick = (): void => {
     setCurrentStep(0);
+    resetProcess();
   };
 
   return (
