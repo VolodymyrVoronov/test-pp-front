@@ -64,6 +64,9 @@ const PredictionInput = (): JSX.Element => {
         fireConfetti();
         setIsPredicting(false);
         toast.success("Predictions are ready!");
+
+        console.log(response.data);
+        
       }
 
       if (!response.success) {

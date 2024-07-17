@@ -26,7 +26,7 @@ const LogoutButton = ({
       navigate(ROUTES.LOGIN, { replace: true });
 
       clearTimeout(timeoutId);
-    }, 2000);
+    }, 500);
   };
 
   return (

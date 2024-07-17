@@ -16,13 +16,10 @@ export const authApi = axios.create({
 export const predict = async (data: IStockData): Promise<PredictResult> => {
   const daysToPredict = useAppStore.getState().daysToPredict;
 
-  console.log("predict", data, daysToPredict);
-  
-
   try {
     const response = await authApi.post<IPredictSuccessResponse>(
       `/pp/predict?days=${daysToPredict}`,
-      data,
+      { stocks: data },
     );
 
     return {
