@@ -113,7 +113,7 @@ const PredictionResult = (): JSX.Element => {
         </Button>
       </div>
 
-      <BorderBeam size={100} duration={12} delay={9} borderWidth={2} />
+      <BorderBeam size={250} duration={12} delay={9} borderWidth={2} />
     </div>
   );
 };
