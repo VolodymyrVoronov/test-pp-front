@@ -97,7 +97,7 @@ const PredictionInput = (): JSX.Element => {
 
         <AlertDescription className="mt-3 flex flex-col gap-1">
           The process may take some time. The time depends on the size of your
-          CSV file, Internet connection and days to predict.
+          CSV file, Internet connection and number of days to predict.
         </AlertDescription>
       </Alert>
 

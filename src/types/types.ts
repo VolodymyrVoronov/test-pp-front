@@ -7,6 +7,10 @@ export interface IUserData {
 
 export type FormType = "register" | "login";
 
+export type SuccessOrErrorResponse<S, E> =
+  | { success: true; data: S }
+  | { success: false; error: E | string };
+
 export interface IRegisterSuccessResponse {
   secret: string;
 }
@@ -15,9 +19,10 @@ export interface IRegisterErrorResponse {
   error: string;
 }
 
-export type RegisterResult =
-  | { success: true; data: IRegisterSuccessResponse }
-  | { success: false; error: IRegisterErrorResponse | string };
+export type RegisterResult = SuccessOrErrorResponse<
+  IRegisterSuccessResponse,
+  IRegisterErrorResponse
+>;
 
 export interface ILoginSuccessResponse {
   token: string;
@@ -28,9 +33,10 @@ export interface ILoginErrorResponse {
   error: string;
 }
 
-export type LoginResult =
-  | { success: true; data: ILoginSuccessResponse }
-  | { success: false; error: ILoginErrorResponse | string };
+export type LoginResult = SuccessOrErrorResponse<
+  ILoginSuccessResponse,
+  ILoginErrorResponse
+>;
 
 export interface IVerifySuccessResponse {
   message: string;
@@ -41,9 +47,10 @@ export interface IVerifyErrorResponse {
   error: string;
 }
 
-export type VerifyResult =
-  | { success: true; data: IVerifySuccessResponse }
-  | { success: false; error: IVerifyErrorResponse | string };
+export type VerifyResult = SuccessOrErrorResponse<
+  IVerifySuccessResponse,
+  IVerifyErrorResponse
+>;
 
 export interface ICheckAuthSuccessResponse {
   message: string;
@@ -53,9 +60,10 @@ export interface ICheckAuthErrorResponse {
   error: string;
 }
 
-export type CheckAuthResult =
-  | { success: true; data: ICheckAuthSuccessResponse }
-  | { success: false; error: ICheckAuthErrorResponse | string };
+export type CheckAuthResult = SuccessOrErrorResponse<
+  ICheckAuthSuccessResponse,
+  ICheckAuthErrorResponse
+>;
 
 export interface IParsedCSVFile {
   meta: ParseMeta;
