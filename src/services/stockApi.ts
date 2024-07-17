@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 import { API_URL } from "../constants/constants";
+import { useAppStore } from "../store/app";
 import {
   IPredictErrorResponse,
   IPredictSuccessResponse,
@@ -12,13 +13,15 @@ export const authApi = axios.create({
   baseURL: API_URL,
 });
 
-export const predict = async (
-  data: IStockData,
-  days: number,
-): Promise<PredictResult> => {
+export const predict = async (data: IStockData): Promise<PredictResult> => {
+  const daysToPredict = useAppStore.getState().daysToPredict;
+
+  console.log("predict", data, daysToPredict);
+  
+
   try {
     const response = await authApi.post<IPredictSuccessResponse>(
-      `/pp/predict?days=${days}`,
+      `/pp/predict?days=${daysToPredict}`,
       data,
     );
 

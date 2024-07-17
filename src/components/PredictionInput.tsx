@@ -1,6 +1,10 @@
 import { ArrowLeft, ArrowRight, Info, Rocket } from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useShallow } from "zustand/react/shallow";
 
+import fireConfetti from "../lib/fireConfetti";
+import { predict } from "../services/stockApi";
 import { useAppStore } from "../store/app";
 
 import DaysToPredictInput from "./DaysToPredictInput";
@@ -10,17 +14,15 @@ import { Button } from "./ui/button";
 import Particles from "./ui/particles";
 
 const PredictionInput = (): JSX.Element => {
-  const [parsedCSVFile, daysToPredict, setCurrentStep] = useAppStore(
-    useShallow((state) => [
-      state.parsedCSVFile,
-      state.daysToPredict,
-      state.setCurrentStep,
-    ]),
+  const [parsedCSVFile, setCurrentStep] = useAppStore(
+    useShallow((state) => [state.parsedCSVFile, state.setCurrentStep]),
   );
 
-  console.log(parsedCSVFile);
+  const [isPredicting, setIsPredicting] = useState(false);
 
   const onStartPredictionButtonClick = async (): Promise<void> => {
+    setIsPredicting(true);
+
     const processedData = parsedCSVFile?.data.map((row) => {
       const processedRow: Record<string, string | number> = {};
 
@@ -55,7 +57,27 @@ const PredictionInput = (): JSX.Element => {
       return processedRow;
     });
 
-    console.log("onStartPredictionButtonClick", processedData);
+    if (processedData) {
+      const response = await predict(processedData);
+
+      if (response.success) {
+        fireConfetti();
+        setIsPredicting(false);
+        toast.success("Predictions are ready!");
+      }
+
+      if (!response.success) {
+        setIsPredicting(false);
+
+        if (typeof response.error === "string") {
+          toast.error(response.error);
+        } else {
+          const { error } = response.error;
+
+          toast.error(error);
+        }
+      }
+    }
   };
 
   const onPreviousStepButtonClick = (): void => {
@@ -68,13 +90,14 @@ const PredictionInput = (): JSX.Element => {
 
   return (
     <div className="relative z-40 flex h-auto flex-col gap-10 rounded-md bg-white p-5 text-center shadow-xl">
-      <DaysToPredictInput />
+      <DaysToPredictInput isInputDisabled={isPredicting} />
 
       <div className="relative flex h-[320px] w-[320px] items-center justify-center lg:h-[350px] lg:w-[450px]">
         <Button
           className="text-md relative z-40 flex size-44 flex-col gap-2 rounded-full transition-all hover:scale-105 active:scale-100"
           size="sm"
           onPress={onStartPredictionButtonClick}
+          isDisabled={isPredicting}
         >
           <span className="absolute z-[-1] inline-flex size-36 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span>
 
@@ -111,6 +134,7 @@ const PredictionInput = (): JSX.Element => {
           size="sm"
           variant="secondary"
           onPress={onPreviousStepButtonClick}
+          isDisabled={isPredicting}
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Previous Step

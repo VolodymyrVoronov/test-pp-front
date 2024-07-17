@@ -9,7 +9,13 @@ import {
   NumberFieldSteppers,
 } from "./ui/numberfield";
 
-const DaysToPredictInput = (): JSX.Element => {
+interface IDaysToPredictInputProps {
+  isInputDisabled?: boolean;
+}
+
+const DaysToPredictInput = ({
+  isInputDisabled,
+}: IDaysToPredictInputProps = {}): JSX.Element => {
   const [daysToPredict, setDaysToPredict] = useAppStore(
     useShallow((state) => [state.daysToPredict, state.setDaysToPredict]),
   );
@@ -24,6 +30,7 @@ const DaysToPredictInput = (): JSX.Element => {
       defaultValue={7}
       onChange={onDaysToPredictChange}
       value={daysToPredict}
+      isDisabled={isInputDisabled}
     >
       <Label className="text-lg">Days to predict</Label>
       <FieldGroup>
