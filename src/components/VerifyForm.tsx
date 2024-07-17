@@ -1,9 +1,9 @@
-import { Shield } from "lucide-react";
+import { useLocalStorage } from "@mantine/hooks";
+import { ArrowLeft, Shield } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { TextField } from "react-aria-components";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "@mantine/hooks";
 
 import { ROUTES } from "../constants/constants";
 import { verify } from "../services/authApi";
@@ -56,9 +56,13 @@ const VerifyForm = (): JSX.Element => {
     }
   };
 
+  const onBackButtonClick = (): void => {
+    navigate(ROUTES.LOGIN);
+  };
+
   return (
     <Card className="z-20 rounded-none bg-white p-5 text-gray-700 shadow-2xl md:p-10">
-      <div className="flex flex-col gap-1">
+      <div className="flex w-auto flex-col gap-1 sm:w-[400px]">
         <h1 className="text-2xl font-semibold">
           Please enter your OTP to verify your account
         </h1>
@@ -79,15 +83,28 @@ const VerifyForm = (): JSX.Element => {
         </TextField>
       </div>
 
-      <Button
-        onPress={onVerifyButtonClick}
-        type="button"
-        isDisabled={!otp}
-        className="mt-10 w-full"
-      >
-        Verify
-        <Shield className="ml-2 h-4 w-4" />
-      </Button>
+      <div className="mt-10 flex w-full flex-row gap-5">
+        <Button
+          onPress={onBackButtonClick}
+          type="button"
+          variant="secondary"
+          className="w-full"
+          isDisabled={!!otp}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </Button>
+
+        <Button
+          onPress={onVerifyButtonClick}
+          type="button"
+          isDisabled={!otp}
+          className="w-full"
+        >
+          Verify
+          <Shield className="ml-2 h-4 w-4" />
+        </Button>
+      </div>
     </Card>
   );
 };

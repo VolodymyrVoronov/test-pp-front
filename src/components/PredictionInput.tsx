@@ -10,8 +10,12 @@ import { Button } from "./ui/button";
 import Particles from "./ui/particles";
 
 const PredictionInput = (): JSX.Element => {
-  const [parsedCSVFile, setCurrentStep] = useAppStore(
-    useShallow((state) => [state.parsedCSVFile, state.setCurrentStep]),
+  const [parsedCSVFile, daysToPredict, setCurrentStep] = useAppStore(
+    useShallow((state) => [
+      state.parsedCSVFile,
+      state.daysToPredict,
+      state.setCurrentStep,
+    ]),
   );
 
   console.log(parsedCSVFile);

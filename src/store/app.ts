@@ -10,7 +10,7 @@ export interface IAppStore {
   parsedCSVFile: IParsedCSVFile | null;
   fileName: string;
   currentStep: number;
-  dayToPredict: number;
+  daysToPredict: number;
 }
 
 export interface IAppActions {
@@ -18,7 +18,7 @@ export interface IAppActions {
   resetCSVFile: () => void;
   setFileName: (fileName: string) => void;
   setCurrentStep: (step: number) => void;
-  setDayToPredict: (day: number) => void;
+  setDaysToPredict: (day: number) => void;
 }
 
 type StoreWithActions = IAppStore & IAppActions;
@@ -31,7 +31,7 @@ export const useAppStore = create<StoreWithActions>()(
         parsedCSVFile: null,
         fileName: "",
         currentStep: 0,
-        dayToPredict: 7,
+        daysToPredict: 7,
 
         setCSVFile: (file: string) => {
           const parsedNewCSVFiles = Papa.parse(file, {
@@ -65,9 +65,9 @@ export const useAppStore = create<StoreWithActions>()(
           });
         },
 
-        setDayToPredict: (day: number) => {
+        setDaysToPredict: (day: number) => {
           set((state) => {
-            state.dayToPredict = day;
+            state.daysToPredict = day;
           });
         },
       }),

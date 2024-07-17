@@ -10,20 +10,20 @@ import {
 } from "./ui/numberfield";
 
 const DaysToPredictInput = (): JSX.Element => {
-  const [dayToPredict, setDayToPredict] = useAppStore(
-    useShallow((state) => [state.dayToPredict, state.setDayToPredict]),
+  const [daysToPredict, setDaysToPredict] = useAppStore(
+    useShallow((state) => [state.daysToPredict, state.setDaysToPredict]),
   );
 
-  const onDayToPredictChange = (value: number): void => {
-    setDayToPredict(value);
+  const onDaysToPredictChange = (value: number): void => {
+    setDaysToPredict(value);
   };
 
   return (
     <NumberField
       minValue={1}
       defaultValue={7}
-      onChange={onDayToPredictChange}
-      value={dayToPredict}
+      onChange={onDaysToPredictChange}
+      value={daysToPredict}
     >
       <Label className="text-lg">Days to predict</Label>
       <FieldGroup>
