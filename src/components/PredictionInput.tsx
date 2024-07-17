@@ -14,8 +14,22 @@ import { Button } from "./ui/button";
 import Particles from "./ui/particles";
 
 const PredictionInput = (): JSX.Element => {
-  const [parsedCSVFile, setCurrentStep] = useAppStore(
-    useShallow((state) => [state.parsedCSVFile, state.setCurrentStep]),
+  const [
+    parsedCSVFile,
+    predictions,
+    graph,
+    setCurrentStep,
+    setPredictions,
+    setGraph,
+  ] = useAppStore(
+    useShallow((state) => [
+      state.parsedCSVFile,
+      state.predictions,
+      state.graph,
+      state.setCurrentStep,
+      state.setPredictions,
+      state.setGraph,
+    ]),
   );
 
   const [isPredicting, setIsPredicting] = useState(false);
@@ -65,8 +79,8 @@ const PredictionInput = (): JSX.Element => {
         setIsPredicting(false);
         toast.success("Predictions are ready!");
 
-        console.log(response.data);
-        
+        setPredictions(response.data.predictions);
+        setGraph(response.data.graph);
       }
 
       if (!response.success) {
@@ -90,6 +104,11 @@ const PredictionInput = (): JSX.Element => {
   const onNextStepButtonClick = (): void => {
     setCurrentStep(3);
   };
+
+  const isPredictionReady = predictions.length > 0 && graph !== "";
+
+  console.log(isPredictionReady);
+  
 
   return (
     <div className="relative z-40 flex h-auto flex-col gap-10 rounded-md bg-white p-5 text-center shadow-xl">
@@ -148,7 +167,7 @@ const PredictionInput = (): JSX.Element => {
           size="sm"
           variant="secondary"
           onPress={onNextStepButtonClick}
-          isDisabled
+          isDisabled={!isPredictionReady}
         >
           Get Prediction
           <ArrowRight className="ml-2 h-4 w-4" />

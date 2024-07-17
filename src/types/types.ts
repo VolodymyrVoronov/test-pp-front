@@ -68,14 +68,13 @@ export type CheckAuthResult = SuccessOrErrorResponse<
 >;
 
 export interface IPredictSuccessResponse {
-  data: {
-    intercept: number;
-    slope: number;
-    predictions: {
-      date: string;
-      price: number;
-    }[];
-  };
+  intercept: number;
+  slope: number;
+  predictions: {
+    date: string;
+    price: number;
+  }[];
+  graph: string;
 }
 
 export interface IPredictErrorResponse {
