@@ -15,13 +15,13 @@ const errorUploadFileMessage =
   "Invalid file format. Only CSV files are allowed";
 
 const CSVUploader = (): JSX.Element => {
-  const [fileName, setCurrentStep, setCSVFile, resetCSVFile, setFileName] =
+  const [fileName, setCurrentStep, setCSVFile, resetProcess, setFileName] =
     useAppStore(
       useShallow((state) => [
         state.fileName,
         state.setCurrentStep,
         state.setCSVFile,
-        state.resetCSVFile,
+        state.resetProcess,
         state.setFileName,
       ]),
     );
@@ -36,7 +36,7 @@ const CSVUploader = (): JSX.Element => {
   };
 
   const onResetButtonClick = (): void => {
-    resetCSVFile();
+    resetProcess();
     setFileName("");
   };
 
