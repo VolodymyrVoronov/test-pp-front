@@ -33,7 +33,6 @@ const PredictionResult = (): JSX.Element => {
   };
 
   const onStartOverButtonClick = (): void => {
-    setCurrentStep(0);
     resetProcess();
   };
 
