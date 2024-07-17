@@ -5,6 +5,8 @@ export interface IUserData {
   password: string;
 }
 
+export interface IStockData {}
+
 export type FormType = "register" | "login";
 
 export type SuccessOrErrorResponse<S, E> =
@@ -63,6 +65,19 @@ export interface ICheckAuthErrorResponse {
 export type CheckAuthResult = SuccessOrErrorResponse<
   ICheckAuthSuccessResponse,
   ICheckAuthErrorResponse
+>;
+
+export interface IPredictSuccessResponse {
+  data: any;
+}
+
+export interface IPredictErrorResponse {
+  error: string;
+}
+
+export type PredictResult = SuccessOrErrorResponse<
+  IPredictSuccessResponse,
+  IPredictErrorResponse
 >;
 
 export interface IParsedCSVFile {

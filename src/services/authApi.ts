@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 
+import { API_URL } from "../constants/constants";
 import {
   CheckAuthResult,
   ICheckAuthErrorResponse,
@@ -16,7 +17,7 @@ import {
 } from "../types/types";
 
 export const authApi = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: API_URL,
 });
 
 export const register = async (data: IUserData): Promise<RegisterResult> => {

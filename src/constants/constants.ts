@@ -13,3 +13,5 @@ export const ROUTES = {
   VERIFY: PATHS.VERIFY,
   MAIN: PATHS.MAIN,
 } as const;
+
+export const API_URL = "http://localhost:8080";
