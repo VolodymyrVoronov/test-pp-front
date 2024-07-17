@@ -6,6 +6,7 @@ import GraphView from "./GraphView";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { BorderBeam } from "./ui/border-beam";
 import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -63,30 +64,32 @@ const PredictionResult = (): JSX.Element => {
         <span className="font-semibold">{fileName.split(".")[0]}</span>
       </span>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-left">Date</TableHead>
-            <TableHead className="text-left">Price</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {predictions.map((prediction, index) => (
-            <TableRow key={index}>
-              <TableCell className="text-left font-semibold">
-                {prediction.date}
-              </TableCell>
-              <TableCell className="text-left font-semibold">
-                {prediction.price.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })}
-              </TableCell>
+      <ScrollArea className="h-72">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-left">Date</TableHead>
+              <TableHead className="text-left">Price</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            {predictions.map((prediction, index) => (
+              <TableRow key={index}>
+                <TableCell className="text-left font-semibold">
+                  {prediction.date}
+                </TableCell>
+                <TableCell className="text-left font-semibold">
+                  {prediction.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </ScrollArea>
 
       <div className="flex flex-row justify-center gap-5">
         <Button
