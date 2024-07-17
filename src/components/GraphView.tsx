@@ -1,6 +1,6 @@
-import { ComponentProps, useEffect, useRef } from "react";
+import { ComponentProps } from "react";
 
-interface IGraphViewProps extends ComponentProps<"div"> {
+interface IGraphViewProps extends ComponentProps<"iframe"> {
   htmlContent: string;
 }
 
@@ -9,23 +9,14 @@ const GraphView = ({
   className,
   ...props
 }: IGraphViewProps): JSX.Element => {
-  const graphRef = useRef<HTMLDivElement | null>(null);
-
-  console.log(htmlContent);
-
-  useEffect(() => {
-    if (graphRef.current) {
-      let shadowRoot = graphRef.current.shadowRoot;
-
-      if (!shadowRoot) {
-        shadowRoot = graphRef.current.attachShadow({ mode: "open" });
-      }
-
-      shadowRoot.innerHTML = htmlContent;
-    }
-  }, [htmlContent]);
-
-  return <div ref={graphRef} className={className} {...props} />;
+  return (
+    <iframe
+      title="graph"
+      srcDoc={htmlContent}
+      className={className}
+      {...props}
+    />
+  );
 };
 
 export default GraphView;

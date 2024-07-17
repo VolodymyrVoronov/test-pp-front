@@ -36,6 +36,8 @@ const PredictionInput = (): JSX.Element => {
 
   const onStartPredictionButtonClick = async (): Promise<void> => {
     setIsPredicting(true);
+    setPredictions([]);
+    setGraph("");
 
     const processedData = parsedCSVFile?.data.map((row) => {
       const processedRow: Record<string, string | number> = {};
@@ -107,9 +109,6 @@ const PredictionInput = (): JSX.Element => {
 
   const isPredictionReady = predictions.length > 0 && graph !== "";
 
-  console.log(isPredictionReady);
-  
-
   return (
     <div className="relative z-40 flex h-auto flex-col gap-10 rounded-md bg-white p-5 text-center shadow-xl">
       <DaysToPredictInput isInputDisabled={isPredicting} />
@@ -121,7 +120,9 @@ const PredictionInput = (): JSX.Element => {
           onPress={onStartPredictionButtonClick}
           isDisabled={isPredicting}
         >
-          <span className="absolute z-[-1] inline-flex size-36 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span>
+          {isPredicting && (
+            <span className="absolute z-[-1] inline-flex size-36 animate-ping rounded-full bg-[#77e3ff] opacity-75"></span>
+          )}
 
           <Rocket className="size-7" />
 
