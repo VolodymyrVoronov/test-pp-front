@@ -69,6 +69,10 @@ const CSVUploader = (): JSX.Element => {
             }
           } catch (error) {
             console.error(error);
+
+            if (error instanceof Error) {
+              toast.error(error.message);
+            }
           }
         }}
       >
@@ -97,6 +101,10 @@ const CSVUploader = (): JSX.Element => {
               }
             } catch (error) {
               console.error(error);
+
+              if (error instanceof Error) {
+                toast.error(error.message);
+              }
             }
           }}
           acceptedFileTypes={["text/csv"]}
